@@ -1,16 +1,18 @@
 # See the available options: https://tdt-documentation.london.cloudapps.digital/configure_project/global_configuration/#configure-your-documentation-site
 
 # Host to use for canonical URL generation (without trailing slash)
-host: https://ministryofjustice.github.io/hmpps-architecture-blueprint
+host: https:/user-guide.hmpps-architecture-blueprint.service.justice.gov.uk
 
 # Header-related options
-show_govuk_logo: true
+show_govuk_logo: false
 service_name: HMPPS Architecture Blueprint
 service_link: /
 phase: "Alpha"
 
 # Links to show on right-hand-side of header
 header_links:
+
+  Documentation: /
   GitHub: https://github.com/ministryofjustice/hmpps-architecture-blueprint
 
 # Enables search functionality. This indexes pages only and is not recommended for single-page sites.
