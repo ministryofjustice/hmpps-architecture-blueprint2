@@ -5,7 +5,7 @@ host: https://ministryofjustice.github.io/hmpps-architecture-blueprint2
 
 # Header-related options
 show_govuk_logo: true
-service_name: HMPPS Architecture Blueprint
+service_name: HMPPS Architecture Blueprint2
 service_link: /
 phase: "Alpha"
 
