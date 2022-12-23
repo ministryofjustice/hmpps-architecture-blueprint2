@@ -1,0 +1,28 @@
+# HMPPS Architecture Principles
+
+## Higher Level Abstract Principles
+
+- Emergent design over upfront design
+- High-level long-term options over detailed long-term design
+- Microservices over monoliths
+- Data services over databases
+- Boundaries of responsibility over shared ownership
+
+Aligning to: [MOJ Architecture Principles for Justice](https://docs.google.com/document/d/1XBTuCw0y--4fZpHcTLWilSFx_qz3aewTiWYJGTZU4sA/edit)
+
+## Principles in Practice
+
+1. Digital Prison Services (DPS) will be architected as a set of loosely-coupled, "right-sized" (Domains?) services, each owned and supported for their life-time by teams of dedicated professionals. These will be built with a single user experience and to GDS standards.
+
+2. Domain Services will be recognised as key authority systems responsible for their own data, ensuring that this data is available to the people that need it including for reporting and data analytics.
+
+3. Prison data should be retrieved from the appropriate domain API if required. NOMIS should no-longer be considered the source of truth for prison data. In the short to medium term, data can be synchronised back to NOMIS to satisfy downstream dependencies.
+
+4. Domain Services will integrate in a loosely coupled way using Events and APIs. Domains services are responsible for listening out for event of interest and acting accordingly.
+
+5. Where possible, data will not be duplicated data across prison and probation services
+
+## References
+
+- [Continuous Architecture in Practice](https://pgppgp.wordpress.com/2014/08/18/continuous-architecture-principles/)
+- [HMPPS Technical Vision](https://docs.google.com/presentation/d/1FcWKZEddcJLFtKdtGARUjobEbecOZvqmkwXzwK5Y1W0/edit#slide=id.gb7e7521b36_0_2)
