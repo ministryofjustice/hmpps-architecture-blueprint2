@@ -1,0 +1,48 @@
+---
+title: Products and Domains
+weight: 7100
+---
+
+# <%= current_page.data.title %>
+
+## Approach
+
+A set of high level products has been identified. Delivery teams are organised around these products in order that they can focus on delivering them in a shorter timescale by focussing on more holistic and better design not policy change to run prisons without NOMIS.
+
+![](../../images/dps-overview.png)
+
+Products are made up of Domains - each containing a defined and bounded business area.
+
+The domain service must contain all components necessary to manage the data owned by that domain. The default structure should be sufficient to implement a domain in most cases but alternative structures may be considered if deemed necessary.
+
+![](../../images/domain-fundamentals-default-domain.drawio.png "default-domain")
+
+## User interface
+
+[User Interfaces](/documentation/products-domains/user-interfaces.html) provide facilities to view, create, manage and maintain the domain's data. It is likely that the user interface will require data from other domains and these may be retrieved by accessing their respective domain APis.
+
+## Orchestration Layer
+
+This organises the data required by the front end service into a readily consumable form. It is recommended that a dedicated service is deployed to contain this orchestration from the outset. If it is known that this will always be simple, a domain team may consider incorporating this orchestration into the front end service.
+
+## Domain APIs
+
+The Domain API is used by both this domain and by other domains to gain access to this domain's data.
+
+## Subdomain Microservices
+
+Theses tore and manage the domain's data. There is no hard and fast rule on how big or small these microservices should be - they should be "just big enough".
+
+**Domain data** may be stored in single instance of a Cloud Platform provided AWS RDS PostgreSQL database. Procurement details maybe be found [here](https://github.com/ministryofjustice/cloud-platform-terraform-rds-instance)
+
+## Events
+
+The domain may need to react to an event - a business level change - lying outside it's scope of responsibility i.e. occurring in another domain. The other domain will publish such events to [HMPPS Domain Events][hmpps-domain-events]. It is the responsibility of this domain to listen out for  events it is interested in and react according.
+
+Similarly, this domain should publish business level changes in it's data which other domains may listen out and react accordingly.
+
+[hmpps-domain-events]: ../../documentation/common-components/domain-events.html
+
+## Source Code Storage
+
+All HMPPS source code is stored in the [Ministry Of Justice GitHub Repository](https://github.com/orgs/ministryofjustice)

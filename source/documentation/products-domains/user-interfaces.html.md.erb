@@ -1,5 +1,5 @@
 ---
-title: User Interface
+title: User Interfaces
 ---
 
 # <%= current_page.data.title %>
@@ -9,4 +9,17 @@ title: User Interface
 The user interface should enable users to maintain data within the domain. The most popular browser in use within HMPPS is Microsoft Edge - user interfaces should be tested against this browser.
 
 ## Construction
+
 Built using the [Typescript template project](https://github.com/ministryofjustice/hmpps-template-typescript) as a base, the user interface must align to [DPS UI Guidelines]()
+
+## User Audit
+
+All business-level actions undertaken by the user must be audited using [HMPPS Audit][hmpps-audit] common component.
+
+[hmpps-audit]: ../../documentation/common-components/user-audit.html
+
+## Security and Access
+
+Staff-facing user interfaces must be secured using the [HMPPS Auth][hmpps-auth] common component
+
+[hmpps-auth]: ../../documentation/common-components/user-authorisation.html
