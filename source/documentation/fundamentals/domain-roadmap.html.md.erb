@@ -3,3 +3,40 @@ title: Domain Roadmap
 ---
 
 # <%= current_page.data.title %>
+
+The two primary aspects driving the DPS project are
+
+- The need to displace NOMIS by the end of 2026
+- The desire to transform business processes
+
+These aspects are somewhat in competition with each other - a focus on one will naturally diminish focus on the other.
+
+## Work Trajectory
+
+![](../../images/offnomis-transformation-matrix.png)
+
+In the general case, domains teams are required to closely align to the standard work trajectory - focussing on getting off NOMIS and incorporating maintenance screen improvements which may improve the user experience but do not necessarily transform business processes. If a team believes it appropriate to deviate far from this trajectory - to incorporate significant transformation business change for example - the team should approach the DPS Strategy Team to present this case and gain approval for this approach.
+
+## Deployment Priority
+
+### Core domains
+
+Many other domains are dependent on this domain's data meaning that the highest priority components are those which remove the dependency on NOMIS APIs i.e. the Domain/Subdomain APIs and Domain Events.
+
+If we then consider that business value has the next highest priority, the next component to look at is the user interface and any required orchestration. This new UI can enable augmentation of the NOMIS data as required.
+
+The final components to be considered are the data storage microservices which once populate, allow NOMIS storage to be switched off.
+
+### Non-core domains with low business transformation
+
+The component which provides most business value earliest is the user interface and as such, this is the top priority item. Next in line are the microservices & events.
+
+A team may consider implementing microservices at the same time as the UI and this is acceptable providing this does not adversely affect the standard work trajectory - or unless dispensation from the DPS strategy team to adopt this approach has been granted. If this more holistic approach is taken, it is recommended that the domain is "migrated" to microservices on a sub-domain by sub-domain basis.
+
+Once a sub-domain of data is strangled from NOMIS, other sub-domains may follow.
+
+### Non-core domains with high business transformation
+
+No other domains are dependent on this domain's data - the domain team is not constrained by having to reduce the impact of this dependency. The priority driver for this domain is business transformation - the drive to get off NOMIS exists but is of lower priority in the short term.
+
+Domain solution should align to the DPS architectural pattern but the team is largely free to construct and release components of this pattern in the order which best addresses the business need. The domain team is must publish and keep to a roadmap which includes timescales for "getting off NOMIS". These timescales should align to DPS strategic objectives.
