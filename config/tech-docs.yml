@@ -1,12 +1,12 @@
 # See the available options: https://tdt-documentation.london.cloudapps.digital/configure_project/global_configuration/#configure-your-documentation-site
 
 # Host to use for canonical URL generation (without trailing slash)
-host: https://hmpps-architecture-blueprint.service.justice.gov.uk
+host:
 
 # Header-related options
 show_govuk_logo: false
 service_name: HMPPS Architecture Blueprint
-service_link: /
+service_link: https://hmpps-architecture-blueprint.service.justice.gov.uk
 phase: "Alpha"
 
 # Links to show on right-hand-side of header
@@ -19,10 +19,11 @@ enable_search: false
 # Tracking ID from Google Analytics (e.g. UA-XXXX-Y)
 ga_tracking_id:
 
-# Enable collapsible navigation in the sidebar
-collapsible_nav: true
+# Enable multipage navigation in the sidebar
+multipage_nav: false
 
-multipage_nav: true
+# Enable collapsible navigation in the sidebar
+collapsible_nav: false
 
 # Table of contents depth – how many levels to include in the table of contents.
 # If your ToC is too long, reduce this number and we'll only show higher-level
