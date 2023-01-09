@@ -1,8 +1,4 @@
----
-title: Domain API
----
-
-# <%= current_page.data.title %>
+# Domain APIs
 
 APIs must incorporate a REST architectural style
 
@@ -27,7 +23,7 @@ All services must provide a **/health** endpoint which checks all dependencies a
 
 ### /ping
 
-This simple check should return a http status of 200 if the service is up and running. It is suitable to be called by other services’ health checks and by kubernetes liveness and readiness probes if the application framework doesn’t provide specific endpoints.
+This simple check should return a http status of 200 if the service is up and running. It is suitable to be called by other services’ health checks and by kubernetes live-ness and readiness probes if the application framework doesn’t provide specific endpoints.
 
 ### /info
 

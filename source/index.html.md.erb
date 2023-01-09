@@ -1,17 +1,10 @@
 ---
 title: HMPPS Architecture Blueprint
-last_reviewed_on: 2022-12-21
-review_in: 1 day
-weight: 7000
 ---
 
-# <%= current_page.data.title %>
+# HMPPS Architecture Blueprint
 
 >This formative document guides teams in delivering products and services which make up Digital Prisons Service (DPS). If documentation is missing or isn't clear, please [let us know](https://mojdt.slack.com/archives/C049XU1LR6W).
-
-For instruction on how to revise this site and troubleshooting, please see the [README] file in the project repository.
-
-[README]: https://github.com/ministryofjustice/hmpps-architecture-blueprint
 
 This user guide is for teams with applications or services deployed on, or intending to deploy into HMPPS Digital Prisons Service. It contains the blueprint for a reference architecture which has been designed to accommodate most services which will typically comprise:
 
@@ -20,3 +13,123 @@ This user guide is for teams with applications or services deployed on, or inten
 * storage of structured data
 
 In some cases, there may be justification for deviating from this reference architecture. If a domain team believes that this is the case for their domain, they should prepare a case for this deviation and discuss this with their assigned HMPPS Digital Technical Architect or open a discussion with the TA community at Slack Channel [#hmpps-technical-architecture](https://mojdt.slack.com/archives/CPT2USKRQ).
+
+## [Principles](documentation/principles/principles-overview.html)
+
+## Products and Domains
+
+### Approach
+
+A set of high level products has been identified. Delivery teams are organised around these products in order that they can focus on delivering them in a shorter timescale by focussing on more holistic and better design not policy change to run prisons without NOMIS.
+
+![](../images/dps-overview.png)
+
+Products are made up of Domains - each containing a defined and bounded business area.
+
+The domain service must contain all components necessary to manage the data owned by that domain. The default structure should be sufficient to implement a domain in most cases but alternative structures may be considered if deemed necessary.
+
+![](../images/domain-fundamentals-default-domain.drawio.png)
+
+### User interface
+
+[User Interfaces](documentation/products-domains/user-interfaces.html) provide facilities to view, create, manage and maintain the domain's data. It is likely that the user interface will require data from other domains and these may be retrieved by accessing their respective domain APis.
+
+### Orchestration Layer
+
+This organises the data required by the front end service into a readily consumable form. It is recommended that a dedicated service is deployed to contain this orchestration from the outset. If it is known that this will always be simple, a domain team may consider incorporating this orchestration into the front end service.
+
+### [Domain APIs]
+
+The Domain API is used by both this domain and by other domains to gain access to this domain's data. [This area](documentation/products-domains/domain-apis.html) contains further detail.
+
+### Subdomain Microservices
+
+Theses tore and manage the domain's data. There is no hard and fast rule on how big or small these microservices should be - they should be "just big enough". Further detail is available [here](documentation/products-domains/microservices.html).
+
+**Domain data** may be stored in single instance of a Cloud Platform provided AWS RDS PostgreSQL database. Procurement details maybe be found [here](https://github.com/ministryofjustice/cloud-platform-terraform-rds-instance)
+
+### Events
+
+The domain may need to react to an event - a business level change - lying outside it's scope of responsibility i.e. occurring in another domain. The other domain will publish such events to [HMPPS Domain Events][hmpps-domain-events]. It is the responsibility of this domain to listen out for  events it is interested in and react according.
+
+Similarly, this domain should publish business level changes in its data which other domains may listen out and react accordingly.
+
+[hmpps-domain-events]: ../documentation/common-components/domain-events.html
+
+### Source Code Storage
+
+All HMPPS source code is stored in the [Ministry Of Justice GitHub Repository](https://github.com/orgs/ministryofjustice)
+
+### Deployment Roadmap
+
+Details available [here](documentation/products-domains/domain-roadmap.html)
+
+## Core Domains
+
+Core Domains manage and hold data which is used by many other domains.
+
+* [Core Person](documentation/core-domains/core-person.html)
+* [Prisoner Location](documentation/core-domains/prisoner-location.html)
+* [Prisoner Timetable](documentation/core-domains/prisoner-timetable.html)
+* [Sentence and Offence](documentation/core-domains/sentence-and-offence.html)
+* [Court Register](documentation/core-domains/court-register.html)
+
+## Common Components
+
+Common Components address cross-cutting concerns applicable to all domains.
+
+* [Alerts](documentation/common-components/alerts.html)
+* [Business Metrics](documentation/common-components/business-metrics.html)
+* [Domain Events](documentation/common-components/domain-events.html)
+* [Monitoring](documentation/common-components/monitoring.html)
+* [System Logging](documentation/common-components/system-logging.html)
+* [User Audit](documentation/common-components/user-audit.html)
+* [User Authorisation](documentation/common-components/user-authorisation.html)
+
+## Hosting
+
+* [Hosting Patterns](https://technical-guidance.service.justice.gov.uk/documentation/standards/hosting.html#how-to-host-services).
+
+### Cloud Platform
+
+All DPS domain services should be hosted using MOJ Cloud Platform. Exceptions are possible of course but the team wishing to use alternative hosting arrangements must prepare present their case to [HMPPS Lead Architects](https://mojdt.slack.com/archives/C049XU1LR6W) for scrutiny and approval.
+
+Details on using MOJ Cloud PLatoform are available [here](https://user-guide.cloud-platform.service.justice.gov.uk/)
+
+* [Containers]() - todo
+* [Kubernetes]() - todo
+
+[Lens](https://k8slens.dev/) is a useful desktop tool for exploring a Kubernetes Cluster.
+
+## Target Delivery Dates
+
+- Take ownership of key prisons data by end of 2023/24
+- Users will be able to manage activities and appointments on DPS by Autumn 2024
+- Prisoner's journeys into, out of and around the prison estate will be managed on DPS by 2025
+- Case administration will be carried out on DPS by 2025
+- Users will be able to manage safety of prisoners on DPS by 2025
+
+## Links to other sources of Information
+
+### HM Government
+* [GDS Service Standard](https://www.gov.uk/service-manual/service-standard)
+* [Notifications - gov.uk Notify](https://www.notifications.service.gov.uk/)
+* [Login - gov.uk One Login](https://www.sign-in.service.gov.uk/)
+* [Payments - gov.uk Pay](https://www.payments.service.gov.uk/)
+
+### MOJ
+
+* [Technical Guidance](https://technical-guidance.service.justice.gov.uk)
+* [Cloud Platform user guide](https://user-guide.cloud-platform.service.justice.gov.uk)
+* [Modernisation Platform user guide](https://user-guide.modernisation-platform.service.justice.gov.uk/)
+* [Architectural Principles](https://docs.google.com/document/d/1XBTuCw0y--4fZpHcTLWilSFx_qz3aewTiWYJGTZU4sA/edit)
+* [MOJ Digital Forms](https://moj-forms.service.justice.gov.uk/)
+* [MOJ Operations Engineering](https://operations-engineering.service.justice.gov.uk)
+
+### HMPPS
+
+* [DPS Tech Team Documentation](https://tech-docs.hmpps.service.justice.gov.uk)
+
+For instruction on how to revise this site and troubleshooting, please see the [README] file in the project repository.
+
+[README]: https://github.com/ministryofjustice/hmpps-architecture-blueprint
