@@ -1,9 +1,5 @@
 # Architectural Principles
 
-## Vision
-
-The Digital Prisons Service (DPS) is conceived as a multi-tier, event-driven ecosystem of integrated services which help drive prison processes and enable prison staff to make informed decisions for prison operations.
-
 ## Higher Level Abstract Principles
 
 - Emergent design over upfront design
@@ -17,10 +13,10 @@ Aligning to: [MOJ Architecture Principles for Justice](https://docs.google.com/d
 ## Principles in Practice
 
 - Digital Prison Services (DPS) will be architected as a set of loosely-coupled, "right-sized" (Domains?) services, each owned and supported for their life-time by teams of dedicated professionals. These will be built with a single user experience and to GDS standards.
-- Domain Services will be recognised as key authority systems responsible for their own data. Domain services must ensure that their domain data is available to downstream services as required - including for reporting and data analytics purposes.
-- Core prison data must be retrieved from the appropriate code domain API. NOMIS should no-longer be considered the source of truth for prison data. In the short to medium term, data can be synchronised back to NOMIS to satisfy downstream dependencies.
+- Domain Services will be recognised as key authority systems responsible for their own data. Domain service delivery teams must ensure that their domain's data is available to downstream services as required - both via an API and for reporting and data analytics purposes.
+- Core prison data must be retrieved from the appropriate domain API. NOMIS should no-longer be considered the source of truth for prison data. In the short to medium term, data can be synchronised back to NOMIS to satisfy downstream dependencies.
 - Domain Services will integrate in a loosely coupled way using Events and APIs. Domains services are responsible keeping themselves aligned to the current prisons state by listening out for event of interest and performing internal processing accordingly.
-- Data will not be duplicated data across prison and probation services unless it is absolutely necessary - e.g. for reasons of performance or resilience
+- Data should not be duplicated data across prison and probation services unless it is absolutely necessary - e.g. for reasons of performance or resilience
 
 ## Security Principles
 
