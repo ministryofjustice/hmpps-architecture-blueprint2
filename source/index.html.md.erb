@@ -38,7 +38,7 @@ The domain service must contain all components necessary to manage the data owne
 
 This organises the data required by the front end service into a readily consumable form. It is recommended that a dedicated service is deployed to contain this orchestration from the outset. If it is known that this will always be simple, a domain team may consider incorporating this orchestration into the front end service.
 
-### [Domain APIs]
+### Domain APIs
 
 The Domain API is used by both this domain and by other domains to gain access to this domain's data. [This area](documentation/products-domains/domain-apis.html) contains further detail.
 
@@ -46,13 +46,13 @@ The Domain API is used by both this domain and by other domains to gain access t
 
 Theses tore and manage the domain's data. There is no hard and fast rule on how big or small these microservices should be - they should be "just big enough". Further detail is available [here](documentation/products-domains/microservices.html).
 
-**Domain data** may be stored in single instance of a Cloud Platform provided AWS RDS PostgreSQL database. Procurement details maybe be found [here](https://github.com/ministryofjustice/cloud-platform-terraform-rds-instance)
+Even if implemented with a number of microservices, **domain data** may be stored in single instance of a Cloud Platform provided AWS RDS PostgreSQL database. Procurement details maybe be found [here](https://github.com/ministryofjustice/cloud-platform-terraform-rds-instance)
 
 ### Events
 
-The domain may need to react to an event - a business level change - lying outside it's scope of responsibility i.e. occurring in another domain. The other domain will publish such events to [HMPPS Domain Events][hmpps-domain-events]. It is the responsibility of this domain to listen out for  events it is interested in and react according.
+The domain must publish business level within its scope which other domains may listen out and react accordingly. These events should be published to [HMPPS Domain Events][hmpps-domain-events].
 
-Similarly, this domain should publish business level changes in its data which other domains may listen out and react accordingly.
+The domain may need to react to business events occuring outside its scope of responsibility i.e. occurring in another domain. It is the responsibility of this domain to listen out for events it is interested in and react according. Events are skinny by default - a domain consuming an event may need to call out to the publishing domain's API to obtain full data regarding the event.
 
 [hmpps-domain-events]: ../documentation/common-components/domain-events.html
 
