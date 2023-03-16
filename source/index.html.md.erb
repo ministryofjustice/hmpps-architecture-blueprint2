@@ -34,16 +34,16 @@ A set of high level products has been identified. Delivery teams are organised a
 
 Products contain scopes of related requirements & functionality. An HMPPS Service Owner alongside their delivery teams is responsible for developing/procuring the digital components which address the business requirements of a product. This in turn enables HMPPS to wean itself off the NOMIS functionality which currently "addresses" those requirements.
 
-| Prison Orientated .Products |
-|-----------------------------|
-| DPS Foundation              |
-| Manage a Sentence           |
-| Move a Prisoner             |
-| Manage Safety               |
-| Manage Activities           |
-| Prisoner Finance            |
-| Prisoner Contacts           |
-| Security and Intelligence   |
+| Prison Orientated Products |
+|----------------------------|
+| DPS Foundation             |
+| Manage a Sentence          |
+| Move a Prisoner            |
+| Manage Safety              |
+| Manage Activities          |
+| Prisoner Finance           |
+| Prisoner Contacts          |
+| Security and Intelligence  |
 
 Products are broken down into Domains.
 
@@ -62,7 +62,7 @@ The default structure should be sufficient to implement a domain in most cases b
 
 ![](../images/domain-fundamentals-default-domain.drawio.png)
 
-An HLD should be produced for the domain - and must be produced if the domain architecture deviates from the default. HLD examples are available from:
+A High Level Technical Architecture Diagram (HLTAD) should be produced for the domain - and **must** be produced if the domain architecture deviates from the default. HLTAD examples are available from:
 
 * [PICT](https://dsdmoj.atlassian.net/wiki/spaces/PIC/pages/1535705290)
 * [PECS](https://dsdmoj.atlassian.net/wiki/spaces/PECS4/pages/1914306732)
@@ -77,13 +77,44 @@ This organises the data required by the front end service into a readily consuma
 
 ### Domain APIs
 
-The Domain APIs are used to gain access to a domain's data. [This area](documentation/products-domains/domain-apis.html) contains further detail.
+A domain's APIs are used to gain access to a domain's data. [This area](documentation/products-domains/domain-apis.html) contains further detail.
 
 ### Subdomain Microservices
 
-Theses tore and manage the domain's data. There is no hard and fast rule on how big or small these microservices should be - they should be "just big enough" and "not too big". Further detail is available [here](documentation/products-domains/microservices.html).
+These store and manage the domain's data. There is no hard and fast rule on how big or small these microservices should be - they should be "just big enough" and "not too big". Further detail is available [here](documentation/products-domains/microservices.html).
 
 Even if implemented with a number of microservices, **domain data** may be stored in single instance of a Cloud Platform provided AWS RDS PostgreSQL database. Procurement details maybe be found [here](https://github.com/ministryofjustice/cloud-platform-terraform-rds-instance)
+
+### Service Security Model
+
+#### IP Whitelisting
+
+By default, services are only accessible to other services within the CP K8s cluster. To make a service available externally, the published IP addresses of components requiring access should be added to the service's IP whitelist. IP whitelists are specific to individual services and are held within the helm/values.yaml file for the service. An example from the typescript template repo is available [here] [ip whitelist].
+
+[ip whitelist]: https://github.com/ministryofjustice/hmpps-template-typescript/blob/main/helm_deploy/hmpps-template-typescript/values.yaml
+
+#### Access Tokens
+
+Services must be secured using [oauth 2.0] based security mechanisms. The [HMPPS-Auth] service manages users, roles & tokens etc for DPS. The configuration and use of security tokens should align to the model given in the below diagram
+
+![](../../images/security-tokens-pattern.drawio.png)
+
+The access token obtained when the user enters their credentials is used to gain access to the front end service but should not be used for gaining access to services supporting the front end. Back end services should each have their own dedicated client ID to obtain an access token. The name of the client ID should mirror the name of the service to which it is allocated.
+
+Roles should provide just the minimum set of permissions required and only the minimum set of roles should be given to any client.
+
+NB: [oauth token exchange] [ote] is not currently supported by HMPPS-Auth.
+
+[oauth 2.0]: https://oauth.net/2
+[HMPPS-auth]: https://dsdmoj.atlassian.net/wiki/spaces/NOM/pages/956596231/Access+to+SSO+and+APIs
+[ote]: https://oauth.net/2/token-exchange
+
+#### HTTPS and Certificates
+
+All traffic between services and components must be secured using TLS 1.3. Certificates for securing traffic are provided by Cloud Platform but the domain team must provision these certificates in their namespace configuration within the Cloud Platform Environment's [github repository] [CPE repo]. An example from the VSIP front end development namespace repo is available [here] [vsip cert].
+
+[vsip cert]: https://github.com/ministryofjustice/cloud-platform-environments/blob/740fee5a361580024de27272fbaad863fe9441e4/namespaces/live.cloud-platform.service.justice.gov.uk/visit-someone-in-prison-backend-svc-dev/06-certificate.yaml
+[CPE repo]: https://github.com/ministryofjustice/cloud-platform-environments/tree/main/namespaces/live.cloud-platform.service.justice.gov.uk
 
 ### Events
 
