@@ -87,11 +87,15 @@ Even if implemented with a number of microservices, **domain data** may be store
 
 ### Service Security Model
 
-#### IP Whitelisting
+#### IP Allowlisting
 
-By default, services are only accessible to other services within the CP K8s cluster. To make a service available externally, the published IP addresses of components requiring access should be added to the service's IP whitelist. IP whitelists are specific to individual services and are held within the helm/values.yaml file for the service. An example from the typescript template repo is available [here] [ip whitelist].
+By default, services are only accessible to other services within the CP K8s cluster. To make a service available externally, the published IP addresses of components requiring access should be added to the service's IP allowlist. IP allowlists are specific to individual services and are held within the helm/values.yaml file for the service. An IP allowlist should not be wholly relied upon to provide security for a service but should be used in conjunction with the other security controls available.
 
-[ip whitelist]: https://github.com/ministryofjustice/hmpps-template-typescript/blob/main/helm_deploy/hmpps-template-typescript/values.yaml
+An example of allowlist use in the typescript template repo is available [here] [ts ip allowlist].
+An example of allowlist use in the kotlin template repo is available [here] [ko ip allowlist].
+
+[ts ip allowlist]: https://github.com/ministryofjustice/hmpps-template-typescript/blob/main/helm_deploy/hmpps-template-typescript/values.yaml
+[ko ip allowlist]: https://github.com/ministryofjustice/hmpps-template-kotlin/blob/main/helm_deploy/hmpps-template-kotlin/values.yaml
 
 #### Access Tokens
 
@@ -103,7 +107,7 @@ The access token obtained when the user enters their credentials is used to gain
 
 Roles should provide just the minimum set of permissions required and only the minimum set of roles should be given to any client.
 
-NB: [oauth token exchange] [ote] is not currently supported by HMPPS-Auth.
+NB: [OAuth token exchange] [ote] is not currently supported by HMPPS-Auth.
 
 [oauth 2.0]: https://oauth.net/2
 [HMPPS-auth]: https://dsdmoj.atlassian.net/wiki/spaces/NOM/pages/956596231/Access+to+SSO+and+APIs
@@ -111,16 +115,16 @@ NB: [oauth token exchange] [ote] is not currently supported by HMPPS-Auth.
 
 #### HTTPS and Certificates
 
-All traffic between services and components must be secured using TLS 1.3. Certificates for securing traffic are provided by Cloud Platform but the domain team must provision these certificates in their namespace configuration within the Cloud Platform Environment's [github repository] [CPE repo]. An example from the VSIP front end development namespace repo is available [here] [vsip cert].
+All traffic between services and components must be secured using TLS 1.2 as a minimum. Certificates for securing traffic are provided by Cloud Platform but the domain team must provision these certificates in their namespace configuration within the Cloud Platform Environment's [github repository] [CPE repo]. An example from the VSIP front end development namespace repo is available [here] [vsip cert].
 
 [vsip cert]: https://github.com/ministryofjustice/cloud-platform-environments/blob/740fee5a361580024de27272fbaad863fe9441e4/namespaces/live.cloud-platform.service.justice.gov.uk/visit-someone-in-prison-backend-svc-dev/06-certificate.yaml
 [CPE repo]: https://github.com/ministryofjustice/cloud-platform-environments/tree/main/namespaces/live.cloud-platform.service.justice.gov.uk
 
 ### Events
 
-The domain must publish business level within its scope which other domains may listen out and react accordingly. These events should be published to [HMPPS Domain Events][hmpps-domain-events].
+The domain must publish business level within its scope which other domains may listen out and react to. These events should be published to [HMPPS Domain Events][hmpps-domain-events].
 
-The domain may need to react to business events occuring outside its scope of responsibility i.e. occurring in another domain. It is the responsibility of this domain to listen out for events it is interested in and react according. Events are skinny by default - a domain consuming an event may need to call out to the publishing domain's API to obtain full data regarding the event.
+The domain may need to react to business events occurring outside its scope of responsibility i.e. occurring in another domain. It is the responsibility of this domain to listen out for events it is interested in and react according. Events are skinny by default - a domain consuming an event may need to call out to the publishing domain's API to obtain full data regarding the event.
 
 [hmpps-domain-events]: ../documentation/common-components/domain-events.html
 
