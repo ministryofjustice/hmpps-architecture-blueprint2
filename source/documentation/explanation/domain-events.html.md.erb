@@ -1,4 +1,21 @@
-# HMPPS Domain Events
+---
+title: Domain Events
+hide_in_navigation: true
+---
+
+# Events
+
+The domain must publish business level within its scope which other domains
+may listen out and react accordingly. These events should be published to
+[HMPPS Domain Events][hmpps-domain-events].
+
+The domain may need to react to business events occurring outside its scope of
+responsibility i.e. occurring in another domain. It is the responsibility of
+this domain to listen out for events it is interested in and react according.
+Events are skinny by default - a domain consuming an event may need to call
+out to the publishing domain's API to obtain full data regarding the event.
+
+## HMPPS Domain Events
 
 Built using [AWS SNS](https://aws.amazon.com/sns/) and [AWS SQS](https://aws.amazon.com/sqs/) in a [fanout configuration](https://docs.aws.amazon.com/sns/latest/dg/sns-sqs-as-subscriber.html), HMPPS domain events is a facility which enables choreographed processes across HMPPS systems.
 

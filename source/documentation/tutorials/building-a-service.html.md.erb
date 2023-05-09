@@ -1,0 +1,47 @@
+---
+title: Building a new service using HMPPS templates
+hide_in_navigation: true
+---
+
+## Microservices
+
+### Purpose
+
+A microservice should store, manage and maintain a closely cohesive set of
+data within a domain - a subdomain.
+
+### Construction
+
+Built using the [Kotlin template project](https://github.com/ministryofjustice/hmpps-template-kotlin) as a base, the APi must align to [Government API technical standards](https://www.gov.uk/guidance/gds-api-technical-and-data-standards) and [DPS Microservice Guidelines]()
+
+## User Interfaces
+
+### Purpose
+
+The user interface should enable users to maintain data within the domain. The
+most popular browser in use within HMPPS is Microsoft Edge - user interfaces
+should be tested against this browser.
+
+### Construction
+
+Built using the [Typescript template project](https://github.com/ministryofjustice/hmpps-template-typescript) as a
+base, the user interface must align to [DPS UI Guidelines]()
+
+### User Audit
+
+All business-level actions undertaken by the user must be audited using
+[HMPPS Audit][hmpps-audit] common component.
+
+[hmpps-audit]: /documentation/guides/user-audit.html
+
+### Security and Access
+
+Staff-facing user interfaces must be secured using the
+[HMPPS Auth][hmpps-auth] common component
+
+[hmpps-auth]: /documentation/guides/user-authorisation.html
+
+
+## Further Reading
+
+todo

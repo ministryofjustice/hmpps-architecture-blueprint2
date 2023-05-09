@@ -1,0 +1,18 @@
+---
+title: User Audit
+hide_in_navigation: true
+---
+
+# User Audit
+
+This component is provided to enable domains to audit business-level user
+activity. Domains may asynchronously send entries to HMPPS Audit which will
+store them securely until needed. User interface services should post user
+level activity entries to HMPPS.
+
+It is not expected that user audit entries will be sent by back end domain
+microservices as [system logging](system-logging.html) will provide sufficent
+diagnostic information for these.
+
+* [HMPPS Audit](https://dsdmoj.atlassian.net/wiki/spaces/NOM/pages/4230840396/HMPPS+Audit+-+High+Level+Design)
+* [HMPPS Audit ADR](https://dsdmoj.atlassian.net/wiki/spaces/NDSS/pages/4061822977/ADR+-+Audit+event+capture)
