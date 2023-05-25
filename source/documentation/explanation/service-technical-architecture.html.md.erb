@@ -1,0 +1,39 @@
+---
+title: HMPPS Services - Technical Architecture
+hide_in_navigation: true
+---
+
+# HMPPS Services: Technical Architecture
+
+## User interface
+
+[User Interfaces](/documentation/tutorials/building-a-service.html#user-interfaces)
+provide facilities to view, create, manage and maintain the domain's data. It
+is likely that the user interface will require data from other domains and
+these may be retrieved by accessing their respective domain APis.
+
+### Orchestration Layer
+
+This organises the data required by the front end service into a readily
+consumable form. It is recommended that a dedicated service is deployed to
+contain this orchestration from the outset. If it is known that this will
+always be simple, a domain team may consider incorporating this orchestration
+into the front end service.
+
+### Domain APIs
+
+The Domain APIs are used to gain access to a domain's data.
+[This area](/documentation/tutorials/building-a-service.html#microservices)
+contains further detail.
+
+### Subdomain Microservices
+
+These store and manage the domain's data. There is no hard and fast rule on
+how big or small these microservices should be - they should be "just big
+enough" and "not too big". Further detail is available
+[here](/documentation/tutorials/building-a-service.html#microservices).
+
+Even if implemented with a number of microservices, **domain data** may be
+stored in single instance of a Cloud Platform provided AWS RDS PostgreSQL
+database. Procurement details maybe be found
+[here](https://github.com/ministryofjustice/cloud-platform-terraform-rds-instance)

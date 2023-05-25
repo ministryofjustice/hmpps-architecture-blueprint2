@@ -1,0 +1,63 @@
+---
+title: Architectural Principles
+hide_in_navigation: true
+---
+
+# Architectural Principles
+
+## Higher Level Abstract Principles
+
+- Emergent design over upfront design
+- High-level long-term options over detailed long-term design
+- Microservices over monoliths
+- Data services over databases
+- Boundaries of responsibility over shared ownership
+
+Aligning to: [MOJ Architecture Principles for Justice](https://docs.google.com/document/d/1XBTuCw0y--4fZpHcTLWilSFx_qz3aewTiWYJGTZU4sA/edit)
+
+## Principles in Practice
+
+- Digital Prison Services (DPS) will be architected as a set of
+  loosely-coupled, "right-sized" (Domains?) services, each owned and supported
+  for their life-time by teams of dedicated professionals. These will be built
+  with a single user experience and to GDS standards.
+- Domain Services will be recognised as key authority systems responsible for
+  their own data. Domain service delivery teams must ensure that their
+  domain's data is available to downstream services as required - both via an
+  API and for reporting and data analytics purposes.
+- Core prison data must be retrieved from the appropriate domain API. NOMIS
+  should no-longer be considered the source of truth for prison data. In the
+  short to medium term, data can be synchronised back to NOMIS to satisfy
+  downstream dependencies.
+- Domain Services will integrate in a loosely coupled way using Events and
+  APIs. Domains services are responsible keeping themselves aligned to the
+  current prisons state by listening out for event of interest and performing
+  internal processing accordingly.
+- Data should not be duplicated data across prison and probation services
+  unless it is absolutely necessary - e.g. for reasons of performance or
+  resilience
+
+## Security Principles
+
+HMPPS Digital aims to provide technical solutions that are “Secure By Design”
+and aligned to MoJ Digital and Justice architecture principles and security
+guidance.
+
+- Emergent design over upfront design - security needs to be a continuous
+  consideration
+- Know the limitations of your architecture - security testing to understand
+  our risks
+- Open-source over closed-source - Secure development practices enabling
+  “coding in the open”
+- Continuous delivery over change management
+- Public cloud by default
+- Trust but verify code
+- Secure systems over secure zones
+- Immutable infrastructure over patch-in-place
+- Audit, Audit, Audit
+
+## Further Reading
+
+- [Continuous Architecture in Practice](https://pgppgp.wordpress.com/2014/08/18/continuous-architecture-principles/)
+- [HMPPS Technical Vision Presentation](https://docs.google.com/presentation/d/1FcWKZEddcJLFtKdtGARUjobEbecOZvqmkwXzwK5Y1W0/edit)
+- [HMPPS Architectural Decision Records](https://dsdmoj.atlassian.net/wiki/spaces/NDSS/pages/1625292900/Patterns+and+ADRs)
