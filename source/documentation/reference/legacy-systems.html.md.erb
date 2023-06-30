@@ -28,19 +28,87 @@ probation (community licenses).
 
 [Delius product team pages](https://dsdmoj.atlassian.net/wiki/spaces/NDSS/pages/2880209197/National+Delius+Service+Team+Home+Page)
 
+### Technology
+
+There are a number of APIs that can be used to access data stored in NDelius,
+but it is recommended that in the first instance you post a message in
+[#probation-integration-tech](https://mojdt.slack.com/archives/C02HQ4M2YQN)
+
+### Environments
+
+- Dev (aka Test): https://ndelius.test.probation.service.justice.gov.uk
+- PreProd: https://ndelius.preprod.probation.service.justice.gov.uk
+- Prod: https://ndelius.probation.service.justice.gov.uk
+
+In Prod, OASys and NDelius exchange Offender and Assessment data. This
+integration is replicated in PreProd (ie PreProd NDelius and PreProd OASys
+exchange data), however no such integration exists in Dev.
+
+PreProd contains data copied and pseudo-anonymised from Prod - this is usually
+refreshed monthly. As such Security Clearance is required to access PreProd or
+Prod. There are no such restrictions on Dev.
+
 ## PPUD
 
 Public Protection Unit Database (PPUD) is used for various Public Protection
 purposes, including managing parole, managing recalls, managing mental health
-transfers and managing serious complaints and incidents. It was developed and
-is supported by [Lumen](https://www.lumen.com/en-us/home.html). See
+transfers and managing serious complaints and incidents.
+
+It is developed and supported by [Lumen](https://www.lumen.com/en-us/home.html). See
 [PPUD](https://dsdmoj.atlassian.net/wiki/spaces/ARN/pages/4232904898/PPUD+and+OASys+overlapping+data)
 for some useful context.
 
+### Technology
+
+PPUD is a .net + sql server application hosted (from July 2023) in the MoJ
+Modernisation Platform
+
+There is currently no API available to enable integrations with PPUD.
+
+### Environments
+
+- Dev (known as dev/test): https://internaltest.ppud.justice.gov.uk
+- PreProd (known as UAT): https://uat.ppud.justice.gov.uk
+- Prod: https://www.ppud.justice.gov.uk
+
+UAT contains data copied and pseudo-anonymised from Prod - this is usually
+refreshed 3/4 times each year. As such Security Clearance is required to access
+UAT or Prod. There are no such restrictions on Dev.
+
+There are no integrations between PPUD and any other service.
+
+
 ## OASys
 
-Offender Assessment System (OASys) is a Oracle APEX application which manages
-most of the risk assessments and sentence plans across both the Probation and
+Offender Assessment System (OASys) which manages most of the risk assessments
+and sentence plans across both the Probation and
 Prison Services.
 
-Also see the [Assess Risks and Needs](https://dsdmoj.atlassian.net/wiki/spaces/ARN/overview?homepageId=2358771974) project.
+Also see the [Assess Risks and
+Needs](https://dsdmoj.atlassian.net/wiki/spaces/ARN/overview?homepageId=2358771974)
+project.
+
+### Technology
+
+OASys is a Oracle APEX application hosted in MoJ's Azure fix-n-go environment.
+
+There are a number of APIs that can be used to access data stored in OASys, but
+it is recommended that in the first instance you post a message in
+[#probation-integration-tech](https://mojdt.slack.com/archives/C02HQ4M2YQN)
+
+### Environments
+
+- Dev (known as T1): https://ords.t1.oasys.service.justice.gov.uk
+- PreProd: https://pp-oasys.az.justice.gov.uk
+- Prod: https://oasys.az.justice.gov.uk
+
+In Prod, OASys and NDelius exchange Offender and Assessment data. This
+integration is replicated in PreProd (ie PreProd NDelius and PreProd OASys
+exchange data), however no such integration exists in Dev.
+
+PreProd contains data copied from Prod - this is usually refreshed on a weekly
+basis (on Sunday evenings). As such Security Clearance is required to access
+either PreProd or Prod.
+
+There are also additional environments, T2, Training and Practice that are used,
+but can be ignored for most purposes.
