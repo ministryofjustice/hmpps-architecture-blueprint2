@@ -64,5 +64,4 @@ jobs:
           cd github-pages
           tar -xvf artifact.tar
           npm install linkinator
-          npx linkinator . --recurse --markdown \
-          #  --skip https://github.com/ministryofjustice/dns \
+          npx linkinator . --recurse --markdown --skip ^https://docs.google.com
