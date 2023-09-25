@@ -17,6 +17,7 @@ jobs:
         uses: lycheeverse/lychee-action@v1.8.0
         with:
           args: --verbose --exclude-mail --no-progress './**/*.md' './**/*.html' './**/*.erb' --accept 403,200,429
+                --exclude-path 'https://docs.google.com/documents/*'
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
